@@ -9,8 +9,10 @@
         var basePath = '__BASE_PATH__';
         var path = window.location.pathname;
         if (!path.startsWith(basePath)) return;
-        sessionStorage.setItem('evergreen-pages-redirect', window.location.href);
-        window.location.replace(basePath);
+        var route = path.slice(basePath.length) + window.location.search + window.location.hash;
+        var destination = new URL(basePath, window.location.origin);
+        destination.searchParams.set('__pages_route', route);
+        window.location.replace(destination.href);
       })();
     </script>
   </head>
