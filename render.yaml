@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: evergreen-marketplace-demo
+    runtime: static
+    buildCommand: npm ci && npm run build --workspace frontend
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+    autoDeploy: true
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

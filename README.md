@@ -201,6 +201,12 @@ The static storefront (sample catalog, browser-only cart and wishlist, and demo 
 
 The static Pages deployment does not include the Express/MongoDB API. Account and administrator links are hidden unless `VITE_API_URL` is configured, and the checkout remains a local demo that does not save orders or collect payment. `VITE_USD_TO_INR` is optional and controls display-only conversion of sample USD prices into INR.
 
+## Render demo deployment
+
+The root `render.yaml` configures the same static storefront as a Render Static Site. In the Render dashboard, create a Blueprint from this repository and select the `main` branch; Render will build `frontend/dist` and rewrite application routes such as `/shop` and `/products/1` to the SPA entry point. Future pushes to `main` deploy automatically.
+
+This static deployment uses the public sample catalog and browser-only cart, wishlist, and demo checkout. It does not host the Express/MongoDB API or enable account/admin features. Do not add database credentials or other server secrets to a static-site build.
+
 For API-backed accounts, deploy the backend separately to a Node.js host and configure `MONGODB_URI`, a unique `JWT_SECRET`, `NODE_ENV=production`, and `CLIENT_ORIGIN` with the exact deployed site origin. Configure `VITE_API_URL` to the deployed API URL plus `/api` in the Pages workflow environment before building. Keep backend credentials out of GitHub Pages and all `VITE_*` variables.
 
 ## Known limitations
