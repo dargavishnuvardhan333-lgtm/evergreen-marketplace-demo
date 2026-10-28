@@ -31,8 +31,11 @@ jobs:
         run: npm run build --workspace frontend
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
-      - name: Add client-side route fallback
-        run: cp frontend/dist/index.html frontend/dist/404.html
+      - name: Configure GitHub Pages route fallback
+        run: |
+          node --input-type=module -e "import { readFile, writeFile } from 'node:fs/promises'; const path = 'frontend/dist/404.html'; const html = await readFile(path, 'utf8'); await writeFile(path, html.replaceAll('__BASE_PATH__', process.env.PAGES_BASE_PATH));"
+        env:
+          PAGES_BASE_PATH: /${{ github.event.repository.name }}/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

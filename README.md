@@ -197,7 +197,7 @@ If the folder already contains a Git repository, inspect `git status` and `git r
 
 ## GitHub Pages demo deployment
 
-The static storefront (sample catalog, browser-only cart and wishlist, and demo checkout) can be deployed to GitHub Pages. The workflow in `.github/workflows/deploy.yml` builds the Vite app using the repository path, publishes a `404.html` fallback for React Router routes, and deploys on pushes to `main`. In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source if it is not already selected.
+The static storefront (sample catalog, browser-only cart and wishlist, and demo checkout) can be deployed to GitHub Pages. The workflow in `.github/workflows/deploy.yml` builds the Vite app using the repository path, publishes a redirect fallback for direct React Router links, and deploys on pushes to `main`. In the repository's **Settings → Pages**, choose **GitHub Actions** as the build and deployment source if it is not already selected.
 
 The static Pages deployment does not include the Express/MongoDB API. Account and administrator links are hidden unless `VITE_API_URL` is configured, and the checkout remains a local demo that does not save orders or collect payment. `VITE_USD_TO_INR` is optional and controls display-only conversion of sample USD prices into INR.
 
