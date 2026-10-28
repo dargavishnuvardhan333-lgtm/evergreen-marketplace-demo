@@ -9,7 +9,7 @@ const currentUrl = new URL(window.location.href);
 const redirect = currentUrl.searchParams.get('__pages_route');
 if (redirect) {
   currentUrl.searchParams.delete('__pages_route');
-  const destination = new URL(redirect, window.location.origin);
+  const destination = new URL(`${import.meta.env.BASE_URL}${redirect}`, window.location.origin);
   if (destination.origin === window.location.origin && destination.pathname.startsWith(import.meta.env.BASE_URL)) {
     window.history.replaceState(null, '', `${destination.pathname}${destination.search}${destination.hash}`);
   }
